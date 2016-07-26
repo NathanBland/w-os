@@ -1,10 +1,13 @@
 <template>
-  <nav class="nav has-shadow">
+  <nav class="nav os--nav has-shadow">
     <div class="">
       <div class="nav-left">
-        <figure @click='openMenu' class="nav-item image is-64x64">
-          <img  src="../assets/logo.svg"> menu
-        </figure>
+        <div @click='toggleMenu' class='nav-item'>
+          <figure class="image is-32x32">
+            <img  src="../assets/logo.svg">
+          </figure>
+          <span style='line-height: 36px'>Menu</span>
+        </div>
       </div>
     </div>
     <aside class="menu nav--apps" v-bind:class="{'is-visible': isMenuActive}">
@@ -39,9 +42,19 @@ export default {
       this.$set('isMenuActive', false)
       this.$dispatch('openApp', e)
     },
-    openMenu (e) {
+    toggleMenu (e) {
       this.$set('isMenuActive', (!this.isMenuActive))
-      console.log('isMenuActive:', this.isMenuActive)
+      if (this.isMenuActive) {
+        console.log('current menu target:', e.currentTarget)
+      }
+    },
+    closeMenu (e) {
+      this.$set('isMenuActive', false)
+    }
+  },
+  events: {
+    hideMenu () {
+      this.$set('isMenuActive', false)
     }
   }
 }
@@ -59,7 +72,7 @@ export default {
     position: absolute
     z-index: 100
     left: 0
-    bottom: -6em
+    top: 4em
     background-color: white
     &.is-visible
       display: list-item

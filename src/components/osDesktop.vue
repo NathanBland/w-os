@@ -52,7 +52,9 @@ export default {
     },
     openApp (app) {
       this.apps.push({name: app})
-      console.log('apps:', this.apps)
+      // console.log('apps:', this.apps)
+      console.log('app:', this.apps[this.apps.length - 1])
+      // bringToFront()
     },
     addMe (item) {
       this.appPositions.push(item)
