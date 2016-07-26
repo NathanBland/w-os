@@ -8,7 +8,12 @@
         </header>
         <section class="modal-card-body">
           <ul>
-          <li v-for='file in files'>{{file.name}}</li>
+          <li class='file' @click='setActiveFile(this, file)' v-for='file in files' track-by="$index">
+            <label class="radio">
+              <input type="radio" name="file">
+              {{file}}
+            </label>
+            </li>
           </ul>
         </section>
         <footer class="modal-card-foot">
@@ -36,8 +41,15 @@ export default {
       this.$set('isActive', false)
       if (type === 'save') {
         let app = this.$get('app')
-        app.$set('file', this.selectedFile)
+        localforage.getItem(this.selectedFile).then((data) => {
+          app.$set('file', data)
+        })
       }
+      this.$set('files', [])
+    },
+    setActiveFile (e, file) {
+      console.log('active:', e, file)
+      this.$set('selectedFile', file)
     }
   },
   events: {
