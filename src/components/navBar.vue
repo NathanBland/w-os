@@ -36,6 +36,7 @@ export default {
   methods: {
     openApp (e) {
       console.log('open:', e)
+      this.$set('isMenuActive', false)
       this.$dispatch('openApp', e)
     },
     openMenu (e) {

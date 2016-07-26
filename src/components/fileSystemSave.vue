@@ -41,7 +41,8 @@ export default {
   events: {
     saveFile (data) {
       this.$set('isActive', true)
-      this.$set('fileData', data)
+      this.$set('fileData', data.data)
+      this.$set('fileName', data.name)
     }
   }
 }
