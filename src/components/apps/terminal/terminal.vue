@@ -6,13 +6,13 @@
       </p>
     </nav>
     <div class='terminal--output'>
-      <p v-for="command in commands" track-by="$index">
-        $ {{ command }}: {{ results[$index] }} 
+      <p v-if='results' v-for="(idx, result) in results" track-by='$index'>
+        $ {{ result.command }}: {{result.data}} 
       </p>
     </div>
     <form @submit.preventDefault='runCommand'>
       <p class="control has-icon">
-        <input class="input" type="text" v-model='command' placeholder="">
+        <input class="input" type="text" v-model='command' placeholder="" autofocus>
         <i class="fa fa-dollar"></i>
       </p>
     </form>
@@ -25,10 +25,9 @@ import shell from './commands.js'
 export default {
   data () {
     return {
-      commands: [],
       commandPosition: 0,
       command: '',
-      results: []
+      results: [{command: 'welcome', type: 'string', data: 'Welcome to w-os'}]
     }
   },
   components: {
@@ -41,19 +40,20 @@ export default {
     runCommand (e) {
       // let result = cash(this.$get('command'))
       let command = this.$get('command')
-      // const vue = this
-      this.commands.push(command)
       let result = shell.cmd(this, command)
-      console.log('reuslt:', result)
-      this.results.push(result)
+      // console.log('reuslt:', result)
+      if (result) {
+        this.results.push({...result, command: command})
+      }
       this.$set('command', '')
+      console.log('results:', this.$get('results'))
     }
   }
 }
 </script>
 
 <style lang='sass'>
-.app--terminal
+.card.app--terminal
   background: transparent
   .card-header
     background-color: #fff

@@ -1,5 +1,5 @@
 <template>
-  <div class='osDesktop' v-bind:style="osDesktop">
+  <div class='osDesktop bound' v-bind:style="osDesktop">
     <component v-for='app in apps' :is='app.name'></component>
     <file-system-select></file-system-select>
     <file-system-save></file-system-save>

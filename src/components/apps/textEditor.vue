@@ -2,9 +2,9 @@
   <w-app title='Text-Editor' class='app--text-editor animated fadeInDown'>
     <nav slot='header'>
       <p class="panel-tabs">
-        <a @click='getFileSystem' class="" href="#">open</a>
-        <a @click='saveFile' class="" href="#">save</a>
-        <a class="" href="#">close</a>
+        <a @click='getFileSystem' class="" href="#">Open</a>
+        <a @click='saveFile' class="" href="#">Save</a>
+        <a @click="openNew('textEditor')" class="" href="#">New</a>
       </p>
     </nav>
     <p class="control">
@@ -34,6 +34,9 @@ export default {
     getFileSystem (e) {
       console.log('getFileSystem:', this)
       this.$dispatch('getFileSystem', this)
+    },
+    openNew (app) {
+      this.$dispatch('openApp', app)
     }
   }
 }

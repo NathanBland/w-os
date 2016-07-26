@@ -1,6 +1,6 @@
 <template>
   <div class="w-app card"
-    v-bind:class="{ 'animated zoomOutDown': isDeleted}"     
+    v-bind:class="[isDeleted ? 'animated zoomOutDown': '', isMax ? 'is-fullwidth' : '']"     
     @click="bringToFront"
     @mousedown="bringToFront"
     @animationend="makeMe"  
@@ -9,10 +9,18 @@
       <p class="card-header-title">
         {{title}}
       </p>
-      <slot name='header'></slot>
+      <a class="card-header-icon" >
+        <i class="fa fa-minus-square"></i>
+      </a>
+      <a class="card-header-icon" @click='maxApp'>
+        <i class="fa" v-bind:class="[isMax ? 'fa-square': 'fa-plus-square']"></i>
+      </a>
       <a class="card-header-icon" @click='closeApp'>
         <i class="fa fa-times"></i>
       </a>
+    </header>
+    <header class='card-header'>
+      <slot name='header'></slot>
     </header>
     <div class="card-content">
       <div class="content">
@@ -28,7 +36,7 @@ interact('.w-app header')
   .draggable({
     inertia: true,
     restrict: {
-      restriction: '.osDesktop',
+      restriction: '.bound',
       endOnly: true,
       elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
     },
@@ -90,6 +98,7 @@ export default {
       // preserves its current state and we are modifying
       // its initial state.
       active: '',
+      isMax: false,
       isDeleted: false
     }
   },
@@ -100,6 +109,9 @@ export default {
     closeApp (e) {
       this.$set('isDeleted', true)
       this.$dispatch('closeApp', e)
+    },
+    maxApp (e) {
+      this.$set('isMax', !this.isMax)
     },
     makeMe (e) {
       let target = e.currentTarget
@@ -126,6 +138,13 @@ export default {
     z-index: 0;
     .card-header {
       cursor: move;
+    }
+  }
+  .is-fullwidth {
+    height: 93%;
+    .card-content {
+      height: 100%;
+      overflow-y: auto;
     }
   }
 </style>

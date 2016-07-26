@@ -10,7 +10,7 @@
         </div>
       </div>
     </div>
-    <aside class="menu nav--apps" v-bind:class="{'is-visible': isMenuActive}">
+    <aside class="menu nav--apps" v-bind:class="{'is-visible animated slideInLeft': isMenuActive}">
       <p class="menu-label">
         Apps
       </p>
@@ -25,7 +25,7 @@
 import * as apps from './Applications.vue'
 export default {
   data () {
-    console.log('apps:', apps.comps)
+    // console.log('apps:', apps.comps)
     return {
       // note: changing this line won't causes changes
       // with hot-reload because the reloaded component
@@ -44,9 +44,6 @@ export default {
     },
     toggleMenu (e) {
       this.$set('isMenuActive', (!this.isMenuActive))
-      if (this.isMenuActive) {
-        console.log('current menu target:', e.currentTarget)
-      }
     },
     closeMenu (e) {
       this.$set('isMenuActive', false)
@@ -67,13 +64,16 @@ export default {
     position: relative
   .nav-item--app
     cursor: pointer
+    margin: .5em
   .nav--apps
     display: none
     position: absolute
-    z-index: 100
+    z-index: 10000
     left: 0
     top: 4em
     background-color: white
+    box-shadow: 4px 4px 3px black
+    font-size: 1em
     &.is-visible
       display: list-item
 </style>
