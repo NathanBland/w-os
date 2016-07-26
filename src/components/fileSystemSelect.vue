@@ -41,15 +41,18 @@ export default {
       this.$set('isActive', false)
       if (type === 'save') {
         let app = this.$get('app')
+        console.log('selectedFile:', this.selectedFile)
         localforage.getItem(this.selectedFile).then((data) => {
-          app.$set('file', data)
+          console.log('filedata:', data)
+          app.$set('fileData', data)
+          app.$set('fileName', this.selectedFile.slice(6))
         })
       }
       this.$set('files', [])
     },
     setActiveFile (e, file) {
-      console.log('active:', e, file)
-      this.$set('selectedFile', file)
+      // console.log('active:', e, 'file--' + file)
+      this.$set('selectedFile', 'file--' + file)
     }
   },
   events: {
@@ -63,7 +66,7 @@ export default {
         console.log('idx:', key.indexOf('file--'))
         if (key.indexOf('file--') > -1) {
           console.log('file is file.')
-          this.files.push(key)
+          this.files.push(key.slice(6))
         }
       }).then(() => {
         console.log('Iteration has completed')

@@ -8,7 +8,7 @@
       </p>
     </nav>
     <p class="control">
-      <textarea class="textarea" v-model='fileData' placeholder="Type..">{{file}}</textarea>
+      <textarea class="textarea" v-model='fileData' placeholder="Type..">{{fileData}}</textarea>
     </p>
   </w-app>
 </template>
@@ -29,7 +29,7 @@ export default {
     saveFile (data) {
       // localforage.set(data.filename, data.content)
       console.log('save file:', this.fileData)
-      this.$dispatch('saveFile', this.fileData)
+      this.$dispatch('saveFile', {data: this.fileData, name: this.fileName})
     },
     getFileSystem (e) {
       console.log('getFileSystem:', this)
