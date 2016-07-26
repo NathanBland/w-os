@@ -11,8 +11,8 @@
       <p class="menu-label">
         Apps
       </p>
-      <ul class='nav-item'>
-        <li class='nav-item--app' @click="openApp(app)" v-for='app of apps'>{{app}}</li>
+      <ul class='menu-list'>
+        <li class='nav-item--app' @click="openApp(app)" v-for='app of apps'><a href="#">{{app}}</a></li>
       </ul>
     </aside>
   </nav>
@@ -59,7 +59,7 @@ export default {
     position: absolute
     z-index: 100
     left: 0
-    bottom: -64px
+    bottom: -6em
     background-color: white
     &.is-visible
       display: list-item
