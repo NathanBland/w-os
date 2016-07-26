@@ -28,7 +28,7 @@ interact('.w-app header')
   .draggable({
     inertia: true,
     restrict: {
-      restriction: 'parent',
+      restriction: '.osDesktop',
       endOnly: true,
       elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
     },
