@@ -1,8 +1,8 @@
 <template>
   <div class="w-app card"
-    v-bind:class="{ 'animated zoomOutDown': isDeleted}" 
-    @dragStart="bringToFront" 
+    v-bind:class="{ 'animated zoomOutDown': isDeleted}"     
     @click="bringToFront"
+    @mousedown="bringToFront"
     @animationend="makeMe"  
     draggable='true'>
     <header class="card-header">
