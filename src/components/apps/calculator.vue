@@ -1,12 +1,5 @@
 <template>
   <w-app title='Calculator' class='app--calculator animated fadeInDown'>
-    <nav slot='header'>
-      <p class='panel-tabs'>
-        <a @click='getFileSystem' class='' href='#'>open</a>
-        <a @click='saveFile' class='' href='#'>save</a>
-        <a class='' href='#'>close</a>
-      </p>
-    </nav>
     <p class='control'>
       <div class='calculatorApp'>
         <input class='input calculatorApp-input' value={{calculatorAppInput}} v-model='calculatorAppInput'>
