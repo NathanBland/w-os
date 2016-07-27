@@ -11,35 +11,35 @@
       <div class='calculatorApp'>
         <input class='input calculatorApp-input' value={{calculatorAppInput}} v-model='calculatorAppInput'>
         <div class='calculatorApp-buttons-parent'>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>7</button>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>8</button>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>9</button>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>+</button>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>4</button>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>5</button>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>6</button>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>-</button>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>1</button>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>2</button>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>3</button>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>*</button>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>0</button>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>.</button>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>=</button>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>/</button>
-          <!--<button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>sin</button>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>cos</button>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>^</button>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>sqrt</button>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>tan</button>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>cot</button>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>(</button>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>)</button>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>e^</button>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>ln</button>-->
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>clear</button>
-          <!--<button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>&lt;-</button>
-          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>pi</button>-->
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>7</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>8</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>9</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>+</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>4</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>5</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>6</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>-</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>1</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>2</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>3</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>*</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>0</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>.</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>=</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>/</button>
+          <!--<button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>sin</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>cos</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>^</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>sqrt</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>tan</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>cot</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>(</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>)</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>e^</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>ln</button>-->
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>clear</button>
+          <!--<button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>&lt;-</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>pi</button>-->
         </div>
       </div>
     </p>
