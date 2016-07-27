@@ -48,6 +48,7 @@
 
 <script>
 import wApp from '../wApp'
+import math from 'mathjs'
 export default {
   data () {
     return {
@@ -66,7 +67,7 @@ export default {
       let button = event.target.textContent
 
       if (button === '=') {
-        this.calculate()
+        this.calculatorAppInput = math.eval(this.calculatorAppInput)
       } else if (button === 'clear') {
         this.calculatorAppInput = ''
         this.hasDecimal = false
