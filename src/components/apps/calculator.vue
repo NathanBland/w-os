@@ -9,37 +9,37 @@
     </nav>
     <p class='control'>
       <div class='calculatorApp'>
-        <input class='input calculatorApp-input'>
+        <input class='input calculatorApp-input' value={{calculatorAppInput}} v-model='calculatorAppInput'>
         <div class='calculatorApp-buttons-parent'>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-7'>7</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-8'>8</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-9'>9</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-+'>+</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-4'>4</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-5'>5</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-6'>6</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button--'>-</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-1'>1</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-2'>2</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-3'>3</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-*'>*</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-0'>0</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-.'>.</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-='>=</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-/'>/</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-sin'>sin</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-cos'>cos</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-^'>^</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-sqrt'>sqrt</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-tan'>tan</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-cot'>cot</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-('>(</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-)'>)</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-e^'>e^</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-ln'>ln</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-clr'>clr</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-bkspc'>&lt;-</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-pi'>pi</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>7</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>8</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>9</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>+</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>4</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>5</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>6</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>-</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>1</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>2</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>3</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>*</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>0</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>.</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>=</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>/</button>
+          <!--<button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>sin</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>cos</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>^</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>sqrt</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>tan</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>cot</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>(</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>)</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>e^</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>ln</button>-->
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>clear</button>
+          <!--<button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>&lt;-</button>
+          <button v-on:click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>pi</button>-->
         </div>
       </div>
     </p>
@@ -51,11 +51,40 @@ import wApp from '../wApp'
 export default {
   data () {
     return {
+      calculatorAppInput: '',
+      lastButton: '',
+      hasDecimal: false,
+      operators: ['+', '-', '*', '/']
     }
   },
   methods: {
     calculate () {
       console.log('[calculatorApp] calculate')
+      this.calculatorAppInput = 'Calculate!'
+    },
+    handleButtonPress (event) {
+      let button = event.target.textContent
+
+      if (button === '=') {
+        this.calculate()
+      } else if (button === 'clear') {
+        this.calculatorAppInput = ''
+        this.hasDecimal = false
+        this.lastButton = ''
+      } else if (this.operators.includes(button)) {
+        if (!this.operators.includes(this.lastButton)) {
+          this.calculatorAppInput += ` ${button} `
+          this.hasDecimal = false
+        }
+      } else if (button === '.') {
+        if (!this.hasDecimal) {
+          this.hasDecimal = true
+          this.calculatorAppInput += button
+        }
+      } else {
+        this.calculatorAppInput += button
+      }
+      this.lastButton = button
     }
   },
   components: {
