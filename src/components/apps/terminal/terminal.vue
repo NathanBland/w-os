@@ -13,7 +13,7 @@
           <ul v-if="result.dataType === 'list'">
             <li v-for='(x, item) in result.data' track-by='$index'>{{item}}</li>
           </ul>
-          <span v-if="result.dataType === 'string'">{{result.data}}</span>
+          <span v-else>{{result.data}}</span>
       </div>
     </div>
     <form @submit.preventDefault='runCommand'>
@@ -88,7 +88,8 @@ export default {
     background-color: rgba(0, 0, 0, 0.75)
   .terminal--output
     min-height: 15em
-    
+    max-height: 20em
+    overflow-y: auto
     ul
       list-style: none
       margin-top: 0em
