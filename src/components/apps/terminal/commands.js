@@ -8,25 +8,52 @@ export default {
     }
   },
   cmd (vue, command) {
-    switch (command) {
+    let myCmd = command.split(' ')
+    switch (myCmd[0]) {
       case 'test':
         return {type: 'string', data: 'success'}
+      case 'touch':
+        if (myCmd.length > 1) {
+          localforage.setItem(myCmd[1], '')
+          .then(() => {
+            vue.results.push({dataType: 'string', data: myCmd[1], command: command})
+          })
+          .catch(function (e) {
+            vue.results.push({dataType: 'string', data: e, command: command})
+          })
+        } else {
+          // vue.results.push({dataType: 'string', data: 'Requires at least 1 argument', command: command})
+          return {dataType: 'string', data: 'Requires at least 1 argument'}
+        }
+        break
+      case 'cat':
+        if (myCmd.length > 1) {
+          localforage.getItem(myCmd[1])
+          .then((data) => {
+            vue.results.push({dataType: 'string', data: data, command: command})
+          })
+          .catch(function (e) {
+            vue.results.push({dataType: 'string', data: e, command: command})
+          })
+        } else {
+          return {dataType: 'string', data: 'Requires at least 1 argument'}
+        }
+        break
       case 'ls':
         let result = []
         localforage.iterate((value, key, iterationNumber) => {
-          if (key.indexOf('file--') > -1) {
-            result.push(key.slice(6))
-          }
+          result.push(key)
         }).then(() => {
-          console.log('files', result)
-          return {type: 'list', data: result}
+          // console.log('files', result)
+          vue.results.push({dataType: 'list', data: result, command: command})
+          // return {type: 'list', data: result}
         })
         break
       case 'help':
-        return {type: 'string', data: 'Try help, ls, or any app name.'}
+        return {type: 'string', data: 'Try help, ls, cat, touch, or any app name.'}
       default:
-        console.log('apps:', apps)
-        console.log('dispatch open:', command)
+        // console.log('apps:', apps)
+        // console.log('dispatch open:', command)
         vue.$dispatch('openApp', command)
         return true
     }

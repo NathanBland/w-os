@@ -4,7 +4,8 @@
     @click="bringToFront"
     @mousedown="bringToFront"
     @animationend="makeMe"  
-    draggable='true'>
+    draggable='true'
+    tabindex="0">
     <header class="card-header">
       <p class="card-header-title">
         {{title}}
@@ -13,7 +14,7 @@
         <i class="fa fa-minus-square"></i>
       </a>
       <a class="card-header-icon" @click='maxApp'>
-        <i class="fa" v-bind:class="[isMax ? 'fa-square': 'fa-plus-square']"></i>
+        <i class="fa" v-bind:class="[isMax ? 'fa-compress': 'fa-expand']"></i>
       </a>
       <a class="card-header-icon" @click='closeApp'>
         <i class="fa fa-times"></i>
@@ -97,7 +98,7 @@ export default {
       // with hot-reload because the reloaded component
       // preserves its current state and we are modifying
       // its initial state.
-      active: '',
+      hasFocus: false,
       isMax: false,
       isDeleted: false
     }
@@ -105,6 +106,8 @@ export default {
   methods: {
     bringToFront (e) {
       this.$dispatch('bringToFront', e.currentTarget)
+      this.$dispatch('loseFocus')
+      this.$set('hasFocus', true)
     },
     closeApp (e) {
       this.$set('isDeleted', true)
@@ -121,7 +124,14 @@ export default {
         target.classList.remove('animated')
         target.classList.remove('fadeInDown')
         this.$dispatch('addMe', target)
+        this.$dispatch('loseFocus')
+        this.$set('hasFocus', true)
       }
+    }
+  },
+  events: {
+    loseFocus () {
+      this.$set('hasFocus', false)
     }
   },
   props: ['title', 'appId']
@@ -139,8 +149,12 @@ export default {
     .card-header {
       cursor: move;
     }
+    .card-content {
+      width: unset;
+    }
   }
   .is-fullwidth {
+    transform: translate(-100px, -44px) !important;
     height: 93%;
     .card-content {
       height: 100%;

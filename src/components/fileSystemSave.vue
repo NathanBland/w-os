@@ -34,7 +34,7 @@ export default {
     closeFileSystem (type) {
       this.$set('isActive', false)
       if (type === 'save') {
-        localforage.setItem('file--' + this.$get('fileName'), this.$get('fileData'))
+        localforage.setItem(this.$get('fileName'), this.$get('fileData'))
       }
     }
   },

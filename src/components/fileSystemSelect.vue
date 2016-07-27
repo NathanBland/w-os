@@ -45,14 +45,14 @@ export default {
         localforage.getItem(this.selectedFile).then((data) => {
           console.log('filedata:', data)
           app.$set('fileData', data)
-          app.$set('fileName', this.selectedFile.slice(6))
+          app.$set('fileName', this.selectedFile)
         })
       }
       this.$set('files', [])
     },
     setActiveFile (e, file) {
       // console.log('active:', e, 'file--' + file)
-      this.$set('selectedFile', 'file--' + file)
+      this.$set('selectedFile', file)
     }
   },
   events: {
@@ -63,10 +63,9 @@ export default {
           // will be executed for every item in the
           // database.
         console.log('key, value', [key, value])
-        console.log('idx:', key.indexOf('file--'))
-        if (key.indexOf('file--') > -1) {
-          console.log('file is file.')
-          this.files.push(key.slice(6))
+        if (key.indexOf('.txt') > -1) {
+          console.log('file is txt.')
+          this.files.push(key)
         }
       }).then(() => {
         console.log('Iteration has completed')

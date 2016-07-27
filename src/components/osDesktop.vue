@@ -66,6 +66,9 @@ export default {
     },
     saveFile (data) {
       this.$broadcast('saveFile', data)
+    },
+    loseFocus () {
+      this.$broadcast('loseFocus')
     }
   }
 }

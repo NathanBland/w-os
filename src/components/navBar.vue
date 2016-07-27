@@ -72,7 +72,7 @@ export default {
     left: 0
     top: 4em
     background-color: white
-    box-shadow: 4px 4px 3px black
+    box-shadow: 1px 4px 6px black
     font-size: 1em
     &.is-visible
       display: list-item
