@@ -8,7 +8,12 @@
         </header>
         <section class="modal-card-body">
           <ul>
-          <li v-for='file in files'>{{file.name}}</li>
+          <li class='file' @click='setActiveFile(this, file)' v-for='file in files' track-by="$index">
+            <label class="radio">
+              <input type="radio" name="file">
+              {{file}}
+            </label>
+            </li>
           </ul>
         </section>
         <footer class="modal-card-foot">
@@ -36,8 +41,18 @@ export default {
       this.$set('isActive', false)
       if (type === 'save') {
         let app = this.$get('app')
-        app.$set('file', this.selectedFile)
+        console.log('selectedFile:', this.selectedFile)
+        localforage.getItem(this.selectedFile).then((data) => {
+          console.log('filedata:', data)
+          app.$set('fileData', data)
+          app.$set('fileName', this.selectedFile)
+        })
       }
+      this.$set('files', [])
+    },
+    setActiveFile (e, file) {
+      // console.log('active:', e, 'file--' + file)
+      this.$set('selectedFile', file)
     }
   },
   events: {
@@ -48,9 +63,8 @@ export default {
           // will be executed for every item in the
           // database.
         console.log('key, value', [key, value])
-        console.log('idx:', key.indexOf('file--'))
-        if (key.indexOf('file--') > -1) {
-          console.log('file is file.')
+        if (key.indexOf('.txt') > -1) {
+          console.log('file is txt.')
           this.files.push(key)
         }
       }).then(() => {

@@ -1,5 +1,5 @@
 <template>
-  <div class='osDesktop' v-bind:style="osDesktop">
+  <div class='osDesktop bound' v-bind:style="osDesktop">
     <component v-for='app in apps' :is='app.name'></component>
     <file-system-select></file-system-select>
     <file-system-save></file-system-save>
@@ -52,10 +52,13 @@ export default {
     },
     openApp (app) {
       this.apps.push({name: app})
-      console.log('apps:', this.apps)
+      // console.log('apps:', this.apps)
+      // console.log('app:', this.apps[this.apps.length - 1])
+      // bringToFront()
     },
     addMe (item) {
       this.appPositions.push(item)
+      item.style.zIndex = this.appPositions.length
     },
     getFileSystem (e) {
       console.log('open system fs', e)
@@ -63,6 +66,9 @@ export default {
     },
     saveFile (data) {
       this.$broadcast('saveFile', data)
+    },
+    loseFocus () {
+      this.$broadcast('loseFocus')
     }
   }
 }

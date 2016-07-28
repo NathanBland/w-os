@@ -1,18 +1,27 @@
 <template>
   <div class="w-app card"
-    v-bind:class="{ 'animated zoomOutDown': isDeleted}" 
-    @dragStart="bringToFront" 
+    v-bind:class="[isDeleted ? 'animated zoomOutDown': '', isMax ? 'is-fullwidth' : '']"     
     @click="bringToFront"
+    @mousedown="bringToFront"
     @animationend="makeMe"  
-    draggable='true'>
+    draggable='true'
+    tabindex="0">
     <header class="card-header">
       <p class="card-header-title">
         {{title}}
       </p>
-      <slot name='header'></slot>
+      <a class="card-header-icon" >
+        <i class="fa fa-minus-square"></i>
+      </a>
+      <a class="card-header-icon" @click='maxApp'>
+        <i class="fa" v-bind:class="[isMax ? 'fa-compress': 'fa-expand']"></i>
+      </a>
       <a class="card-header-icon" @click='closeApp'>
         <i class="fa fa-times"></i>
       </a>
+    </header>
+    <header class='card-header'>
+      <slot name='header'></slot>
     </header>
     <div class="card-content">
       <div class="content">
@@ -28,7 +37,7 @@ interact('.w-app header')
   .draggable({
     inertia: true,
     restrict: {
-      restriction: 'parent',
+      restriction: '.bound',
       endOnly: true,
       elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
     },
@@ -89,17 +98,23 @@ export default {
       // with hot-reload because the reloaded component
       // preserves its current state and we are modifying
       // its initial state.
-      active: '',
+      hasFocus: false,
+      isMax: false,
       isDeleted: false
     }
   },
   methods: {
     bringToFront (e) {
       this.$dispatch('bringToFront', e.currentTarget)
+      this.$dispatch('loseFocus')
+      this.$set('hasFocus', true)
     },
     closeApp (e) {
       this.$set('isDeleted', true)
       this.$dispatch('closeApp', e)
+    },
+    maxApp (e) {
+      this.$set('isMax', !this.isMax)
     },
     makeMe (e) {
       let target = e.currentTarget
@@ -109,7 +124,14 @@ export default {
         target.classList.remove('animated')
         target.classList.remove('fadeInDown')
         this.$dispatch('addMe', target)
+        this.$dispatch('loseFocus')
+        this.$set('hasFocus', true)
       }
+    }
+  },
+  events: {
+    loseFocus () {
+      this.$set('hasFocus', false)
     }
   },
   props: ['title', 'appId']
@@ -126,6 +148,17 @@ export default {
     z-index: 0;
     .card-header {
       cursor: move;
+    }
+    .card-content {
+      width: unset;
+    }
+  }
+  .is-fullwidth {
+    transform: translate(-100px, -44px) !important;
+    height: 93%;
+    .card-content {
+      height: 100%;
+      overflow-y: auto;
     }
   }
 </style>

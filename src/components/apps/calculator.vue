@@ -1,45 +1,38 @@
 <template>
-  <w-app title='Calculator' class='app--calculator animated fadeInDown'>
-    <nav slot='header'>
-      <p class='panel-tabs'>
-        <a @click='getFileSystem' class='' href='#'>open</a>
-        <a @click='saveFile' class='' href='#'>save</a>
-        <a class='' href='#'>close</a>
-      </p>
-    </nav>
+  <w-app title='Calculator' class='app--calculator animated fadeInDown' @keyup='monitorKeys'>
     <p class='control'>
       <div class='calculatorApp'>
-        <input class='input calculatorApp-input'>
+        <input class='input calculatorApp-input' value={{calculatorAppInput}} v-model='calculatorAppInput'>
         <div class='calculatorApp-buttons-parent'>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-7'>7</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-8'>8</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-9'>9</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-+'>+</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-4'>4</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-5'>5</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-6'>6</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button--'>-</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-1'>1</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-2'>2</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-3'>3</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-*'>*</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-0'>0</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-.'>.</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-='>=</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-/'>/</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-sin'>sin</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-cos'>cos</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-^'>^</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-sqrt'>sqrt</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-tan'>tan</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-cot'>cot</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-('>(</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-)'>)</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-e^'>e^</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-ln'>ln</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-clr'>clr</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-bkspc'>&lt;-</button>
-          <button class='button is-outlined calculatorApp-buttons-child calculatorApp-button-pi'>pi</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>7</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>8</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>9</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>+</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>4</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>5</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>6</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>-</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>1</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>2</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>3</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>*</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>0</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>.</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>=</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>/</button>
+          <!--<button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>sin</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>cos</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>^</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>sqrt</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>tan</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>cot</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>(</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>)</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>e^</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>ln</button>-->
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>clear</button>
+          <!--<button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>&lt;-</button>
+          <button @click='handleButtonPress' class='button is-outlined calculatorApp-buttons-child'>pi</button>-->
         </div>
       </div>
     </p>
@@ -48,14 +41,51 @@
 
 <script>
 import wApp from '../wApp'
+import math from 'mathjs'
 export default {
   data () {
     return {
+      calculatorAppInput: '',
+      lastInput: '',
+      hasDecimal: false,
+      operators: ['+', '-', '*', '/']
     }
   },
   methods: {
-    calculate () {
-      console.log('[calculatorApp] calculate')
+    monitorKeys (keyboardEvent) {
+      this.handleEntry(keyboardEvent.key)
+    },
+    handleButtonPress (event) {
+      this.handleEntry(event.target.textContent)
+    },
+    handleEntry (input) {
+      if (input === '=' || input === 'Enter') { // Evaluate expression
+        this.calculatorAppInput = math.eval(this.calculatorAppInput)
+        this.lastInput = input
+      } else if (input === 'clear' || input === 'Delete') { // Clear input field
+        this.calculatorAppInput = ''
+        this.hasDecimal = false
+        this.lastInput = ''
+      } else if (input === 'Backspace') {
+        this.calculatorAppInput = this.calculatorAppInput.substring(0, this.calculatorAppInput.length - 1)
+        this.lastInput = this.calculatorAppInput.charAt(this.calculatorAppInput.length - 1)
+      } else if (this.operators.includes(input)) { // Append operator
+        if (!this.operators.includes(this.lastInput)) {
+          this.calculatorAppInput += input
+          this.hasDecimal = false
+          this.lastInput = input
+        }
+      } else if (input === '.') { // Append decimal point
+        if (!this.hasDecimal) { // If legal
+          this.hasDecimal = true
+          this.calculatorAppInput += input
+          this.lastInput = input
+        }
+      } else if (!isNaN(input)) { // Append digit
+        this.calculatorAppInput += input
+        this.lastInput = input
+      }
+      // Ignore the rest
     }
   },
   components: {
