@@ -1,5 +1,5 @@
 <template>
-  <w-app title='Calculator' class='app--calculator animated fadeInDown'>
+  <w-app title='Calculator' class='app--calculator animated fadeInDown' @keyup='monitorKeys'>
     <p class='control'>
       <div class='calculatorApp'>
         <input class='input calculatorApp-input' value={{calculatorAppInput}} v-model='calculatorAppInput'>
@@ -46,39 +46,46 @@ export default {
   data () {
     return {
       calculatorAppInput: '',
-      lastButton: '',
+      lastInput: '',
       hasDecimal: false,
       operators: ['+', '-', '*', '/']
     }
   },
   methods: {
-    calculate () {
-      console.log('[calculatorApp] calculate')
-      this.calculatorAppInput = 'Calculate!'
+    monitorKeys (keyboardEvent) {
+      this.handleEntry(keyboardEvent.key)
     },
     handleButtonPress (event) {
-      let button = event.target.textContent
-
-      if (button === '=') {
+      this.handleEntry(event.target.textContent)
+    },
+    handleEntry (input) {
+      if (input === '=' || input === 'Enter') { // Evaluate expression
         this.calculatorAppInput = math.eval(this.calculatorAppInput)
-      } else if (button === 'clear') {
+        this.lastInput = input
+      } else if (input === 'clear' || input === 'Delete') { // Clear input field
         this.calculatorAppInput = ''
         this.hasDecimal = false
-        this.lastButton = ''
-      } else if (this.operators.includes(button)) {
-        if (!this.operators.includes(this.lastButton)) {
-          this.calculatorAppInput += ` ${button} `
+        this.lastInput = ''
+      } else if (input === 'Backspace') {
+        this.calculatorAppInput = this.calculatorAppInput.substring(0, this.calculatorAppInput.length - 1)
+        this.lastInput = this.calculatorAppInput.charAt(this.calculatorAppInput.length - 1)
+      } else if (this.operators.includes(input)) { // Append operator
+        if (!this.operators.includes(this.lastInput)) {
+          this.calculatorAppInput += input
           this.hasDecimal = false
+          this.lastInput = input
         }
-      } else if (button === '.') {
-        if (!this.hasDecimal) {
+      } else if (input === '.') { // Append decimal point
+        if (!this.hasDecimal) { // If legal
           this.hasDecimal = true
-          this.calculatorAppInput += button
+          this.calculatorAppInput += input
+          this.lastInput = input
         }
-      } else {
-        this.calculatorAppInput += button
+      } else if (!isNaN(input)) { // Append digit
+        this.calculatorAppInput += input
+        this.lastInput = input
       }
-      this.lastButton = button
+      // Ignore the rest
     }
   },
   components: {
