@@ -16,7 +16,7 @@
           <span v-else>{{result.data}}</span>
       </div>
     </div>
-    <form @submit.preventDefault='runCommand'>
+    <form @submit.prevent='runCommand'>
       <p class="control has-icon">
         <input class="input" type="text" v-model='command' placeholder="" autofocus>
         <i class="fa fa-dollar"></i>
