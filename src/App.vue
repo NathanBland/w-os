@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div @click='logIt' id="app">
     <nav-bar></nav-bar>
     <os-desktop></os-desktop>
   </div>
@@ -13,6 +13,13 @@ export default {
   components: {
     navBar,
     osDesktop
+  },
+  methods: {
+    logIt (e) {
+      if (!(e.target).closest('.os--nav')) {
+        this.$broadcast('hideMenu')
+      }
+    }
   },
   events: {
     openApp (app) {
