@@ -14,22 +14,22 @@
         <p>It's currently <strong>{{weather.temp}}</strong>°F and <strong>{{weather.condition}}</strong></p>  
       </div>
       <div v-else>
-        <span class="fa-stack fa-lg fa-4x has-text-centered">
-          <i class="fa fa-cloud fa-stack-1x"></i>
-          <i class="fa fa-ban fa-stack-2x is-danger"></i>
-        </span>
-        <p>No weather data at this time.</p>
+        <p>Enter a location below.</p>
       </div>
     </div>
     <form @submit.prevent='getWeather'>
       <label class="label">Zip Code:</label>
-      <p class="control has-icon has-addons">
-        <input @submit.prevent='getWeather' class="input" :class="{'is-disabled' : isLoadingWeather}" type="text" v-model='zip' placeholder="68506" autofocus>
-        <i class="fa fa-map-marker"></i>
-        <a @click.prevent='getWeather' class="button is-info" :class="{'is-loading is-disabled' : isLoadingWeather}">
-          <i class="fa fa-search"></i>
-        </a>
-      </p>
+      <div class="control is-grouped">
+        <p class="control has-icon is-expanded">
+          <input @submit.prevent='getWeather' class="input is-large" :class="{'is-disabled' : isLoadingWeather}" type="text" v-model='zip' placeholder="68506" autofocus>
+          <i class="fa fa-map-marker"></i>
+        </p>
+        <p class='control'>
+          <a @click.prevent='getWeather' class="button is-info is-large" :class="{'is-loading is-disabled' : isLoadingWeather}">
+            <i class="fa fa-search"></i>
+          </a>
+        </p>
+      </div>
     </form>
   </w-app>
 </template>
