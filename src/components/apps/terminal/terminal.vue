@@ -1,5 +1,6 @@
 <template>
   <w-app title='Terminal' class='app--terminal animated fadeInDown' 
+  :has-sub-nav=true
   @keyup.up="monitorKeys('up')"
   @keyup.down="monitorKeys('down')" >
     <nav slot='header'>

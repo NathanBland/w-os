@@ -1,6 +1,6 @@
 <template>
   <div class="w-app card"
-    v-bind:class="[isDeleted ? 'animated zoomOutDown': '', isMax ? 'is-fullwidth' : '']"     
+    v-bind:class="[loading ? 'isLoading': '', isDeleted ? 'animated zoomOutDown': '', isMax ? 'is-fullwidth' : '']"     
     @click="bringToFront"
     @mousedown="bringToFront"
     @animationend="makeMe"  
@@ -20,7 +20,7 @@
         <i class="fa fa-times"></i>
       </a>
     </header>
-    <header class='card-header'>
+    <header v-if='hasSubNav' class='card-header'>
       <slot name='header'></slot>
     </header>
     <div class="card-content">
@@ -134,7 +134,20 @@ export default {
       this.$set('hasFocus', false)
     }
   },
-  props: ['title', 'appId']
+  props: {
+    title: {
+      type: String,
+      required: true
+    },
+    loading: {
+      type: Boolean
+    },
+    hasSubNav: {
+      type: Boolean,
+      default: false,
+      required: true
+    }
+  }
 }
 </script>
 
@@ -152,6 +165,7 @@ export default {
     .card-content {
       width: unset;
     }
+    transition: 1s background ease-in-out;
   }
   .is-fullwidth {
     transform: translate(-100px, -44px) !important;
@@ -160,5 +174,8 @@ export default {
       height: 100%;
       overflow-y: auto;
     }
+  }
+  .isLoading {
+    background-color: #c3c3c3;
   }
 </style>
