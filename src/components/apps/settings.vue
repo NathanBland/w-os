@@ -5,7 +5,7 @@
   :has-sub-nav='false' >
     <label class="label">Background Image:</label>
     <p class='control'>
-      <input @change='previewBackground' id="the-file-input" type="file">
+      <input @change='previewBackground' class="the-file-input" type="file">
     </p>
     <figure v-if="backgroundData !== ''" class="image is-16x9 animated fadeInDown">
       <img :src="backgroundData">

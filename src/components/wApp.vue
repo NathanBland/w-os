@@ -20,7 +20,7 @@
         <i class="fa fa-times"></i>
       </a>
     </header>
-    <header v-if='hasSubNav' class='card-header'>
+    <header v-if='hasSubNav' class='card-header card-header--subnav'>
       <slot name='header'></slot>
     </header>
     <div class="card-content">
@@ -150,8 +150,7 @@ export default {
   }
 }
 </script>
-
-<style scoped>
+<style lang='css' scoped>
   .w-app {
     position: absolute;
 	  color: #FFF;
@@ -181,5 +180,11 @@ export default {
   }
   .isLoading {
     background-color: #c3c3c3;
+  }
+</style>
+
+<style>
+  .card-header--subnav .panel-tabs a {
+    color: #42afe3;
   }
 </style>
