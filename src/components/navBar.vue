@@ -4,12 +4,13 @@
       <div class="nav-left">
         <div @click='toggleMenu' class='nav-item'>
           <figure class="image is-32x32">
-            <img  src="../assets/logo.svg">
+            <img src="../assets/logo.svg">
           </figure>
           <span style='line-height: 36px'>Menu</span>
         </div>
       </div>
     </div>
+    <clock></clock>
     <aside class="menu nav--apps" v-bind:class="{'is-visible animated slideInLeft': isMenuActive}">
       <p class="menu-label">
         Apps
@@ -23,7 +24,11 @@
 
 <script>
 import * as apps from './Applications.vue'
+import clock from './clock'
 export default {
+  components: {
+    clock
+  },
   data () {
     // console.log('apps:', apps.comps)
     return {
@@ -60,6 +65,7 @@ export default {
 <style lang="sass" scoped>
   .nav
     flex: 0 1 auto
+    justify-content: space-between
   .nav-left
     position: relative
   .nav-item--app
@@ -76,4 +82,7 @@ export default {
     font-size: 1em
     &.is-visible
       display: list-item
+  .nav-clock
+    align-self: center
+    margin: 1em
 </style>
