@@ -60,11 +60,17 @@ export default {
 <style lang="sass" scoped>
   .nav
     flex: 0 1 auto
+    position: absolute
+    width: 100%
+    background: rgba(255, 255, 255, 0.5)
+    z-index: 0
   .nav-left
     position: relative
   .nav-item--app
     cursor: pointer
     margin: .5em
+  .nav-item
+    background: rgba(255, 255, 255, 0.5)
   .nav--apps
     display: none
     position: absolute

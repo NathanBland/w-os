@@ -11,7 +11,7 @@
         {{title}}
       </p>
       <a class="card-header-icon" >
-        <i class="fa fa-minus-square"></i>
+        <i class="fa fa-minus"></i>
       </a>
       <a class="card-header-icon" @click='maxApp'>
         <i class="fa" v-bind:class="[isMax ? 'fa-compress': 'fa-expand']"></i>
@@ -162,10 +162,14 @@ export default {
     .card-header {
       cursor: move;
     }
-    .card-content {
-      width: unset;
-    }
     transition: 1s background ease-in-out;
+  }
+  .card-header .card-header-icon {
+    width: 24px;
+    color: #42afe3;
+  }
+  .card-content {
+    width: unset;
   }
   .is-fullwidth {
     transform: translate(-100px, -44px) !important;
