@@ -31,8 +31,8 @@
             </span>  
             Full Screen
           </button>
-          <button class="button">
-            <span @click='deselect' class="icon is-small">
+          <button @click='deselect' class="button">
+            <span class="icon is-small">
               <i class="fa fa-times"></i>
             </span>
             Close
