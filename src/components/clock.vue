@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import leftPad from 'left-pad'
 export default {
   data () {
     return {
@@ -33,8 +32,13 @@ export default {
         let minutes = now.getMinutes()
         let seconds = now.getSeconds()
         timeString += hours + ':'
-        timeString += leftPad(minutes, 2, '0') + ':'
-        timeString += leftPad(seconds, 2, '0') + ' ' + ampm
+        while (minutes.length < 2) {
+          minutes = '0' + minutes
+        }
+        while (seconds.length < 2) {
+          seconds = '0' + seconds
+        }
+        timeString += minutes + ':' + seconds + ' ' + ampm
         this.currentTime = timeString
       }, 1000)
     }
