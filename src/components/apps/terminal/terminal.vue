@@ -1,22 +1,24 @@
 <template>
   <w-app title='Terminal' class='app--terminal animated fadeInDown' 
+  :has-sub-nav=true
   @keyup.up="monitorKeys('up')"
-  @keyup.down="monitorKeys('down')" >
+  @keyup.down="monitorKeys('down')"
+  @click='giveFocus'>
     <nav slot='header'>
       <p class="panel-tabs">
         <a @click="openNew('terminal')" class="" href="#">New</a>
       </p>
     </nav>
     <div class='terminal--output'>
-      <div v-if='results.length > 0' v-for="(idx, result) in results" track-by='$index'>
-          <span>$ {{ result.command }}:</span>
+      <div class='terminal--result' v-if='results.length > 0' v-for="(idx, result) in results" track-by='$index'>
+          <span>$ {{ result.command }}</span>
           <ul v-if="result.dataType === 'list'">
             <li v-for='(x, item) in result.data' track-by='$index'>{{item}}</li>
           </ul>
-          <span v-else>{{result.data}}</span>
+          <span v-else><br/>{{result.data}}</span>
       </div>
     </div>
-    <form @submit.preventDefault='runCommand'>
+    <form @submit.prevent='runCommand' class='terminal--input'>
       <p class="control has-icon">
         <input class="input" type="text" v-model='command' placeholder="" autofocus>
         <i class="fa fa-dollar"></i>
@@ -39,9 +41,18 @@ export default {
   components: {
     wApp
   },
+  watch: {
+    results: (e) => {
+      let results = document.querySelectorAll('.terminal--result')
+      results[results.length - 1].scrollIntoView({block: 'end', behavior: 'smooth'})
+    }
+  },
   methods: {
     openNew (app) {
       this.$dispatch('openApp', app)
+    },
+    giveFocus (shell) {
+      shell.currentTarget.querySelector('input').focus()
     },
     monitorKeys (e) {
       console.log('key monitor:', e)
@@ -86,20 +97,29 @@ export default {
     background-color: #fff
   .card-content
     background-color: rgba(0, 0, 0, 0.75)
-  .terminal--output
     min-height: 15em
     max-height: 20em
+    overflow-y: auto
+  .terminal--output
     overflow-y: auto
     ul
       list-style: none
       margin-top: 0em
-.is-fullwidth
+  .terminal--input
+    .control.has-icon .input:focus + .fa, .control.has-icon .textarea:focus + .fa
+      color: #1fc8db
+    input
+      background-color: unset
+      color: #1fc8db
+      border: unset
+.card.app--terminal.is-fullwidth
   .card-content
     height: 90%
     overflow-y: auto
+    min-height: unset
+    max-height: unset
   .content
     height: 90%
   .terminal--output
     min-height: unset
-    height: 100%
 </style>

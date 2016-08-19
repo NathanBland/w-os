@@ -1,5 +1,8 @@
 <template>
-  <w-app title='Text-Editor' class='app--text-editor animated fadeInDown'>
+  <w-app 
+    title='Text-Editor' 
+    class='app--text-editor animated fadeInDown'
+    :has-sub-nav=true>
     <nav slot='header'>
       <p class="panel-tabs">
         <a @click='getFileSystem' class="" href="#">Open</a>
