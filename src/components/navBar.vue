@@ -10,16 +10,15 @@
         </div>
       </div>
     </div>
-    <clock></clock>
-    <aside class="menu nav--apps" v-bind:class="{'is-visible animated slideInLeft': isMenuActive}">
-      <p class="menu-label">
-        Apps
-      </p>
-      <ul class='menu-list'>
-        <li class='nav-item--app' @click="openApp(app)" v-for='app of apps'><a href="#">{{app}}</a></li>
-      </ul>
-    </aside>
   </nav>
+  <aside class="menu nav--apps is-visible" v-bind:class="[isMenuOpening ? 'animated slideInLeft': '', isMenuClosing ? 'animated slideOutLeft': '']">
+    <p class="menu-label">
+      Apps
+    </p>
+    <ul class='menu-list'>
+      <li class='nav-item--app' @click="openApp(app)" v-for='app of apps'><a href="#">{{app}}</a></li>
+    </ul>
+  </aside>
 </template>
 
 <script>
@@ -37,7 +36,9 @@ export default {
       // preserves its current state and we are modifying
       // its initial state.
       active: '',
-      isMenuActive: false,
+      isMenuActive: true,
+      isMenuOpening: false,
+      isMenuClosing: false,
       apps: Object.keys(apps.comps)
     }
   },
@@ -45,9 +46,17 @@ export default {
     openApp (e) {
       console.log('open:', e)
       this.$set('isMenuActive', false)
+      this.$set('isMenuClosing', true)
       this.$dispatch('openApp', e)
     },
     toggleMenu (e) {
+      if (!this.isMenuActive) {
+        this.$set('isMenuOpening', true)
+        this.$set('isMenuClosing', false)
+      } else {
+        this.$set('isMenuOpening', false)
+        this.$set('isMenuClosing', true)
+      }
       this.$set('isMenuActive', (!this.isMenuActive))
     },
     closeMenu (e) {
@@ -57,27 +66,41 @@ export default {
   events: {
     hideMenu () {
       this.$set('isMenuActive', false)
+      this.$set('isMenuClosing', true)
+      this.$set('isMenuOpening', false)
     }
   }
 }
 </script>
 
 <style lang="sass" scoped>
+  aside.slideOutLeft
+    animation-duration: .5s
+  .menu-label
+    margin-left: 1em
   .nav
     flex: 0 1 auto
-    justify-content: space-between
+    position: absolute
+    width: 100%
+    background: rgba(255, 255, 255, 0.5)
+    z-index: 0
   .nav-left
     position: relative
+    overflow: unset
+    overflow-x: unset
   .nav-item--app
     cursor: pointer
     margin: .5em
+  .nav-item
+    background: rgba(255, 255, 255, 0.5)
+    z-index: 10000
   .nav--apps
     display: none
     position: absolute
     z-index: 10000
     left: 0
     top: 4em
-    background-color: white
+    background-color: rgba(255, 255, 255, .75)
     box-shadow: 1px 4px 6px black
     font-size: 1em
     &.is-visible

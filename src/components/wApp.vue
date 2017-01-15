@@ -11,7 +11,7 @@
         {{title}}
       </p>
       <a class="card-header-icon" >
-        <i class="fa fa-minus-square"></i>
+        <i class="fa fa-minus"></i>
       </a>
       <a class="card-header-icon" @click='maxApp'>
         <i class="fa" v-bind:class="[isMax ? 'fa-compress': 'fa-expand']"></i>
@@ -20,7 +20,7 @@
         <i class="fa fa-times"></i>
       </a>
     </header>
-    <header v-if='hasSubNav' class='card-header'>
+    <header v-if='hasSubNav' class='card-header card-header--subnav'>
       <slot name='header'></slot>
     </header>
     <div class="card-content">
@@ -150,8 +150,7 @@ export default {
   }
 }
 </script>
-
-<style scoped>
+<style lang='css' scoped>
   .w-app {
     position: absolute;
 	  color: #FFF;
@@ -162,10 +161,14 @@ export default {
     .card-header {
       cursor: move;
     }
-    .card-content {
-      width: unset;
-    }
     transition: 1s background ease-in-out;
+  }
+  .card-header .card-header-icon {
+    width: 24px;
+    color: #42afe3;
+  }
+  .card-content {
+    width: unset;
   }
   .is-fullwidth {
     transform: translate(-100px, -44px) !important;
@@ -177,5 +180,11 @@ export default {
   }
   .isLoading {
     background-color: #c3c3c3;
+  }
+</style>
+
+<style>
+  .card-header--subnav .panel-tabs a {
+    color: #42afe3;
   }
 </style>

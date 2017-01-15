@@ -67,7 +67,7 @@ export default {
       this.$set('lon', result.longitude)
       this.$set('city', result.city + ', ' + result.state)
       this.$set('isLoadingWeather', true)
-      var wm = new WeatherMan(WeatherMan.OPENWEATHERMAP, '148a0f123b0f2801a07b9cb509f255b9')
+      var wm = new WeatherMan(WeatherMan.YAHOO)
       wm.getCurrent(this.$get('lat'), this.$get('lon'))
       .then((result) => {
         // If the result is for weather
