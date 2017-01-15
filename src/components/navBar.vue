@@ -4,7 +4,7 @@
       <div class="nav-left">
         <div @click='toggleMenu' class='nav-item'>
           <figure class="image is-32x32">
-            <img  src="../assets/logo.svg">
+            <img src="../assets/logo.svg">
           </figure>
           <span style='line-height: 36px'>Menu</span>
         </div>
@@ -23,7 +23,11 @@
 
 <script>
 import * as apps from './Applications.vue'
+import clock from './clock'
 export default {
+  components: {
+    clock
+  },
   data () {
     // console.log('apps:', apps.comps)
     return {
@@ -101,4 +105,7 @@ export default {
     font-size: 1em
     &.is-visible
       display: list-item
+  .nav-clock
+    align-self: center
+    margin: 1em
 </style>
