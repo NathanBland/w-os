@@ -1,51 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>w-os</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/img/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/img/icons/favicon-16x16.png">
+    <!--[if IE]><link rel="shortcut icon" href="/static/img/icons/favicon.ico"><![endif]-->
+    <!-- Add to home screen for Android and modern mobile browsers -->
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#4DBA87">
+
+    <!-- Add to home screen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="w-os">
+    <link rel="apple-touch-icon" href="/static/img/icons/apple-touch-icon-152x152.png">
+    <!-- Add to home screen for Windows -->
+    <meta name="msapplication-TileImage" content="/static/img/icons/msapplication-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#000000">
+    <% for (var chunk of webpack.chunks) {
+        for (var file of chunk.files) {
+          if (file.match(/\.(js|css)$/)) { %>
+    <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
   </head>
   <body>
-    <app>
-      <div class='os--loading'>
-        <svg id="svg--loading" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="18.062mm" width="18.062mm" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="0 0 64.000004 64.000004">
-          <g id="layer1" transform="translate(-69.137 -630.65)">
-            <circle class='path' id="path4136" cx="101.14" stroke="#d10000" cy="662.65" r="21.9" stroke-dasharray="40.39998069, 20.19999035" stroke-width="20.2"/>
-          </g>
-        </svg>
-        <h1>We'll be right there...</h1>
-        <style>
-           @keyframes dash {
-            to {
-              /*stroke-dasharray: 10;*/
-              stroke-dashoffset: 0;
-              /*fill: white;*/
-              /*stroke-width: 10;*/
-            }
-          }
-          .path {
-            stroke-dasharray: 100;
-            stroke-dashoffset: 1000;
-            stroke: #42afe3;
-            animation: dash 5s linear 0s infinite;
-            /*fill: #b1e9d5;*/
-            /*stroke-width: 200;*/
-          }
-          .os--loading {
-            text-align: center;
-          }
-          h1 {
-            color: #42afe3;
-          }
-          body {
-            background-color: rgba(255, 255, 255, 0.5)
-          }
-          #svg--loading {
-            width: 500px;
-            height: 500px;
-          }  
-        </style>
-      </div>
-    </app>
+    <noscript>
+      This is your fallback content in case JavaScript fails to load.
+    </noscript>
+    <div id="app"></div>
+    <!-- Todo: only include in production -->
+    <%= htmlWebpackPlugin.options.serviceWorkerLoader %>
     <!-- built files will be auto injected -->
   </body>
 </html>
