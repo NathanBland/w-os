@@ -8,6 +8,7 @@ module.exports = {
   },
   env: {
     browser: true,
+    es6: true
   },
   // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
   extends: 'standard',
@@ -15,9 +16,8 @@ module.exports = {
   plugins: [
     'html'
   ],
-  'globals': {
-      'fetch': true,
-      'FileReader': true
+  globals: {
+    'Promise': true
   },
   // add your custom rules here
   'rules': {

@@ -1,5 +1,5 @@
 const lf = require('localforage')
-export default function (args) {
+export default function (resolve, reject, args) {
   console.log('args,', args)
   lf.setItem('user', args)
   .then((user) => {
