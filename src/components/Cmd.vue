@@ -55,12 +55,14 @@ export default {
           data: 'No command \'' + cmd[1] + '\' found.'
         })
       } else {
-        let commandExec = Promise.resolve()
-        commandExec.then(categories[cmdEntry[0].category][cmd[1]](cmd[2])
-        ).then((result) => {
+        let commandExec = new Promise((resolve, reject) => {
+          categories[cmdEntry[0].category][cmd[1]](resolve, reject, cmd[2])
+        })
+        commandExec
+        .then((result) => {
           console.log('result:', result)
           this.log({
-            cmd: this.input,
+            cmd: cmd[0],
             pwd: this.pwd,
             data: result
           })

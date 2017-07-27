@@ -8,6 +8,7 @@ module.exports = {
   },
   env: {
     browser: true,
+    es6: true
   },
   // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
   extends: 'standard',
@@ -15,6 +16,9 @@ module.exports = {
   plugins: [
     'html'
   ],
+  globals: {
+    'Promise': true
+  },
   // add your custom rules here
   'rules': {
     // allow paren-less arrow functions

@@ -15,13 +15,15 @@ export default {
 }
 </script>
 
-<style lang="sass">
-body
-  margin: 0
-  padding: 0
+<style>
+body {
+  padding: 0;
+  margin: 0;
+}
 
-main
-  width: 100vw
-  height: 100vh
-  position: relative
+main {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
 </style>
