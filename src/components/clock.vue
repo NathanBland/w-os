@@ -21,25 +21,8 @@ export default {
   methods: {
     time () {
       setInterval(() => {
-        let now = new Date()
-        let timeString = ''
-        let hours = now.getHours() % 12
-        let ampm = 'PM'
-        if (hours === 0) {
-          hours = 12
-          ampm = 'AM'
-        }
-        let minutes = now.getMinutes()
-        let seconds = now.getSeconds()
-        timeString += hours + ':'
-        while (minutes.length < 2) {
-          minutes = '0' + minutes
-        }
-        while (seconds.length < 2) {
-          seconds = '0' + seconds
-        }
-        timeString += minutes + ':' + seconds + ' ' + ampm
-        this.currentTime = timeString
+        const now = new Date()
+        this.currentTime = now.toLocaleTimeString({ hour12: true })
       }, 1000)
     }
   }
@@ -48,6 +31,11 @@ export default {
 
 <style lang="sass" scoped>
   .nav-clock
-    align-self: center
-    margin: 1em
+    display: flex
+    align-items: center
+    margin: 0
+    padding-left: 1em
+    padding-right: 1em
+    height: 100%
+    background-color: rgba(255, 255, 255, 0.3)
 </style>
