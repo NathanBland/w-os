@@ -66,9 +66,9 @@ export default {
           return {dataType: 'string', data: 'Requires at least 1 argument'}
         }
         break
-      case 'clear':
-        vue.results = []
-        break
+      // case 'clear':
+      //   vue.results = []
+      //   break
       case 'help':
         return {type: 'string', data: 'Try help, ls, cat, touch, or any app name.'}
       default:
