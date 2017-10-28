@@ -10,13 +10,23 @@
 import * as components from './Applications.vue'
 import fileSystemSelect from './fileSystemSelect.vue'
 import fileSystemSave from './fileSystemSave.vue'
+let localforage = require('localforage')
 export default {
   data () {
     return {
       apps: [],
       appPositions: [],
-      osDesktop: {
-        background: 'no-repeat center/cover url("/static/wallpaper.jpeg")'
+      background: ''
+    }
+  },
+  computed: {
+    osDesktop () {
+      return {
+        backgroundImage: 'url("' + this.$get('background') + '")',
+        // backgroundImage: 'url("/static/wallpaper.jpeg")',
+        backgroundPosition: 'center center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat'
       }
     }
   },
@@ -27,6 +37,9 @@ export default {
     // this.$set('apps', apps)
     this.$set('appPositions', Array.prototype.slice.call(apps))
     // console.log('app pos:', this.appPositions)
+    localforage.getItem('.wallpaper').then((data) => {
+      this.$set('background', data)
+    })
   },
   methods: {
     bringToFront (e) {
@@ -69,6 +82,11 @@ export default {
     },
     loseFocus () {
       this.$broadcast('loseFocus')
+    },
+    updateBg () {
+      localforage.getItem('.wallpaper').then((data) => {
+        this.$set('background', data)
+      })
     }
   }
 }
