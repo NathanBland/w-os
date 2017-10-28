@@ -1,6 +1,6 @@
 <template>
   <nav class="nav os--nav has-shadow">
-    <div class="">
+    <div class="nav-bar">
       <div class="nav-left">
         <div @click='toggleMenu' class='nav-item'>
           <figure class="image is-32x32">
@@ -9,6 +9,7 @@
           <span style='line-height: 36px'>Menu</span>
         </div>
       </div>
+      <clock class="nav-clock"></clock>
     </div>
   </nav>
   <aside class="menu nav--apps is-visible" v-bind:class="[isMenuOpening ? 'animated slideInLeft': '', isMenuClosing ? 'animated slideOutLeft': '']">
@@ -84,6 +85,10 @@ export default {
     width: 100%
     background: rgba(255, 255, 255, 0.5)
     z-index: 0
+  .nav-bar
+    width: 100%
+    display: flex
+    justify-content: space-between
   .nav-left
     position: relative
     overflow: unset
