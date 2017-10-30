@@ -50,7 +50,7 @@ export default {
         })
         break
       case 'help':
-        return {type: 'string', data: 'Try help, ls, cat, touch, or any app name.'}
+        return {type: 'string', data: 'Try help, ls, cat, touch, rm, or any app name.'}
       default:
         // console.log('apps:', apps)
         // console.log('dispatch open:', command)
