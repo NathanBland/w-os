@@ -49,6 +49,26 @@ export default {
           // return {type: 'list', data: result}
         })
         break
+      case 'rm':
+        if (myCmd.length > 1) {
+          const args = myCmd.slice(1)
+          args.map((arg) => (
+            localforage.getItem(arg)
+              .then(async (data) => {
+                await localforage.removeItem(arg)
+                vue.results.push({dataType: 'string', data: '', command: command})
+              })
+              .catch(function (e) {
+                vue.results.push({dataType: 'string', data: e, command: command})
+              })
+          ))
+        } else {
+          return {dataType: 'string', data: 'Requires at least 1 argument'}
+        }
+        break
+      // case 'clear':
+      //   vue.results = []
+      //   break
       case 'help':
         return {type: 'string', data: 'Try help, ls, cat, touch, or any app name.'}
       default:

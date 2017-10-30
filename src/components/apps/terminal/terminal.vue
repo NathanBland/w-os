@@ -11,18 +11,15 @@
     </nav>
     <div class='terminal--output'>
       <div class='terminal--result' v-if='results.length > 0' v-for="(idx, result) in results" track-by='$index'>
-          <span>$ {{ result.command }}</span>
-          <ul v-if="result.dataType === 'list'">
-            <li v-for='(x, item) in result.data' track-by='$index'>{{item}}</li>
-          </ul>
-          <span v-else><br/>{{result.data}}</span>
+        <span>$ {{ result.command }}</span>
+        <ul v-if="result.dataType === 'list'">
+          <li v-for='(x, item) in result.data' track-by='$index'>{{item}}</li>
+        </ul>
+        <span v-else><br/>{{result.data}}</span>
       </div>
     </div>
     <form @submit.prevent='runCommand' class='terminal--input'>
-      <p class="control has-icon">
-        <input class="input" type="text" v-model='command' placeholder="" autofocus>
-        <i class="fa fa-dollar"></i>
-      </p>
+      $ <input type="text" v-model='command' placeholder="" autofocus>
     </form>
   </w-app>
 </template>
@@ -100,6 +97,7 @@ export default {
     min-height: 15em
     max-height: 20em
     overflow-y: auto
+    padding: 0.25em
   .terminal--output
     overflow-y: auto
     ul
